@@ -3,7 +3,8 @@
 > A test utility for testing questrar Request Component with [enzyme](https://airbnb.io/enzyme/)
 
 
-[![NPM](https://img.shields.io/npm/v/questar-test.svg)](https://www.npmjs.com/package/questar-test) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/questar-test.svg)](https://www.npmjs.com/package/questar-test)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 
 ## Install
 
@@ -67,7 +68,7 @@ describe('NiceComponent', () => {
     const wrap = wrapRequest(wrapper)(requestState);
     
     expect(wrap.is(RequestPending)).toBeTruthy()
-    expect(wrap.find(PetiteComponent).length()).toBe(0)
+    expect(wrap.find(PetiteComponent).length).toBe(0)
   });
   
   it('Should remove request state `onClick` to close PetiteComponent', () => {
@@ -86,7 +87,7 @@ describe('NiceComponent', () => {
 });
 ```
 
-Package export only two items. `wrapRequest` as default and a named `import { initialRequestState }`;
+Package exports two ends. `wrapRequest` as default and a named `import { initialRequestState }`;
 
 ```js
 function wrapRequest(

@@ -1,26 +1,26 @@
 module.exports = {
   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest'
   },
   moduleFileExtensions: [
     'js',
     'jsx',
-    'json',
+    'json'
   ],
   moduleDirectories: [
     'node_modules',
     'src',
-    './',
+    './'
   ],
 
   setupTestFrameworkScriptFile: 'jest-enzyme/lib/index.js',
 
   snapshotSerializers: [
-    'enzyme-to-json/serializer',
+    'enzyme-to-json/serializer'
   ],
 
   testEnvironmentOptions: {
-    pretendToBeVisual: true,
+    pretendToBeVisual: true
   },
 
   testRegex: '/test/.*?\\.(test|spec)\\.jsx?$',
@@ -29,7 +29,7 @@ module.exports = {
   collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.js',
-    'src/**/*.jsx',
+    'src/**/*.jsx'
   ],
   coverageDirectory: '<rootDir>/.coverage',
   coverageThreshold: {
@@ -38,8 +38,8 @@ module.exports = {
       functions: 75,
       lines: 65,
       statements: 65
-    },
+    }
   },
   verbose: true,
-  onlyFailures: true,
+  onlyFailures: true
 };

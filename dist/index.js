@@ -37,8 +37,8 @@ function wrapRequest(request, actionsMock) {
 
     /* eslint-disable eqeqeq */
   };if (actionsMock && actionsMock.constructor == Object) {
-    var actions = Object.assign({}, defaultContextState.actions, actionsMock);
-    defaultContextState.actions = actions;
+    // Allow easy requestState action manip and tracking on request component via object ref
+    defaultContextState.actions = actionsMock;
   }
 
   var ripOff = function ripOff() {
@@ -48,6 +48,7 @@ function wrapRequest(request, actionsMock) {
 
   return function setValue(value) {
     if (value && value.constructor == Object && value.id) {
+      // Allow easy requestState manip and tracking on request component via object ref
       var data = defineProperty({}, value.id, value);
       defaultContextState.data = data;
     }
