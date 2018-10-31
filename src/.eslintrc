@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "no-extra-semi": 0,
+    "comma-dangle": 1
+  },
+  "env": {
+    "jest": true
+  }
+}
