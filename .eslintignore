@@ -1,0 +1,4 @@
+coverage/
+.idea/
+dist/
+node_modules/

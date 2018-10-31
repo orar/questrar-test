@@ -1,10 +1,11 @@
 # questar-test
 
-> A test utility for testing questrar Request Component with [enzyme](https://airbnb.io/enzyme/)
+> A test utility for testing questrar Request Component with enzyme (https://airbnb.io/enzyme/)
 
 
 [![NPM](https://img.shields.io/npm/v/questar-test.svg)](https://www.npmjs.com/package/questar-test)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
+[![Build Status](https://travis-ci.org/orarr/questrar-test.svg?branch=master)](https://travis-ci.org/orarr/questrar-test)
 
 ## Install
 
