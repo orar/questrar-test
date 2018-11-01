@@ -1,6 +1,7 @@
 plugins:
   eslint:
     enabled: true
+    channel: "eslint-4"
     config:
       ignore_warnings: true
       extensions:
