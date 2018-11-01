@@ -30,13 +30,13 @@ describe('Wrap a request test', () => {
   });
 
   it('Should export `wrapRequest` as default', () => {
-    expect(wrapRequest).toBeDefined()
+    expect(typeof wrapRequest).toBe('function')
   });
 
   it('Should be able to set the current request state of a request component', () => {
     const wrap = wrapRequest(wrapper);
 
-    expect(typeof wrap === 'function').toBeTruthy();
+    expect(typeof wrap).toBe('function');
     const fullWrap = wrap(requestState);
     expect(fullWrap.prop('request')).toMatchObject({ success: false, failed: true });
 
