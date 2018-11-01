@@ -23,5 +23,5 @@ script:
   - yarn test
 
 after_script:
-  - ./cc-test-reporter upload-coverage -i coverage/lcov.info
+  - ./cc-test-reporter upload-coverage -i coverage/coverage-final.json
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
