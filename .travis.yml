@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - 9
-  - 8
+
 cache:
   directories:
     - node_modules
@@ -10,7 +10,7 @@ install:
   - yarn install
 env:
   global:
-    - CC_TEST_REPORTER_ID=66e05412423a81a7d394b4351956977f7137e7c0bc2bb690fa1c2515ec6218c9
+    - CC_TEST_REPORTER_ID=$CC_TEST_REPORTER_ID
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

@@ -4,6 +4,7 @@
 
 
 [![NPM](https://img.shields.io/npm/v/questar-test.svg)](https://www.npmjs.com/package/questar-test)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6f3339b71b06d3b6279c/maintainability)](https://codeclimate.com/github/orarr/questrar-test/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6f3339b71b06d3b6279c/test_coverage)](https://codeclimate.com/github/orarr/questrar-test/test_coverage)
 [![Build Status](https://travis-ci.org/orarr/questrar-test.svg?branch=master)](https://travis-ci.org/orarr/questrar-test)
 
