@@ -8,9 +8,6 @@ cache:
 
 install:
   - yarn install
-env:
-  global:
-    - CC_TEST_REPORTER_ID=$CC_TEST_REPORTER_ID
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
