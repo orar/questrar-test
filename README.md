@@ -1,4 +1,4 @@
-# questar-test
+# questrar-test
 
 > A test utility for testing questrar Request Component with [enzyme](https://airbnb.io/enzyme/)
 
@@ -11,8 +11,8 @@
 ## Install
 
 ```bash
-yarn add -D questar-test
-npm install --save-dev questar-test
+yarn add -D questrar-test
+npm install --save-dev questrar-test
 ```
 
 
