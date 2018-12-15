@@ -1,30 +1,46 @@
 import { shallow } from 'enzyme'
+import React from 'react';
+import {initialRequest} from './common';
 
 export { initialRequest as initialRequestState } from './common';
 
-export default function wrapRequest(request, actionsMock) {
-  const defaultContextState = {
-    data: { },
-    actions: { }
+export function shallowRequest(componentNode) {
+  if (/with(Single)?Request\(.*\)/.test(componentNode.name())) {
+    return componentNode.dive().first().shallow();
   }
+
+  if (/Request?/.test(componentNode.name())) {
+    return componentNode.first().shallow();
+  }
+}
+
+export default function wrapRequestNode (requestNode, actions) {
+  let componentNode = requestNode;
+
+  const defaultRequestState = {
+    data: initialRequest,
+    actions: {}
+  };
 
   /* eslint-disable eqeqeq */
-  if (actionsMock && actionsMock.constructor == Object) {
-    // Allow easy requestState action manip and tracking on request component via object ref
-    defaultContextState.actions = actionsMock
+  if (actions && actions.constructor == Object) {
+    // Allow custom request state actions for spying on request action calls
+    defaultRequestState.actions = actions
   }
 
-  const ripOff = () => {
-    const component = request.instance().renderComponent(defaultContextState)
-    return shallow(component)
+  if (typeof componentNode.name === 'function') {
+    componentNode = shallowRequest(componentNode);
+  } else {
+    const node = shallow(React.Children.only(requestNode));
+    componentNode = shallowRequest(node);
   }
 
-  return function setValue (value) {
-    if (value && value.constructor == Object && value.id) {
-      // Allow easy requestState manip and tracking on request component via object ref
-      const data = { [value.id]: value }
-      defaultContextState.data = data
+  return function setProps (requestState) {
+    /* eslint-disable eqeqeq */
+    if (requestState && requestState.constructor == Object && requestState.id) {
+      defaultRequestState.data = requestState;
     }
-    return ripOff()
+
+    return componentNode.setProps({ request: defaultRequestState });
   }
 }
