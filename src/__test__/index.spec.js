@@ -1,9 +1,12 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Request } from 'questrar'
-import wrapRequest, { initialRequestState } from '../index'
+import createDefaultStateProvider from 'questrar/store'
+import wrapRequest, { initialRequestState } from '../index';
 
 const Requestor = () => <div>Test Requestor</div>
+
+const stateProvider = createDefaultStateProvider();
 
 describe('Wrap a request test', () => {
   let id
@@ -12,11 +15,11 @@ describe('Wrap a request test', () => {
 
   const createWrapper = () => {
     wrapper = shallow(
-      <Request id={id} inject>
+      <Request stateProvider={stateProvider} id={id} inject>
         <Requestor />
       </Request>
-    )
-  }
+    );
+  };
 
   beforeEach(() => {
     id = 'xsvsgtes231'
@@ -29,8 +32,31 @@ describe('Wrap a request test', () => {
     expect(initialRequestState).toBeDefined()
   });
 
-  it('Should export `wrapRequest` as default', () => {
+  it('Should export `wrapRequest` function as default', () => {
     expect(typeof wrapRequest).toBe('function')
+  });
+
+  it('Should shallow an unwrapped request node', () => {
+    const node = (
+      <Request stateProvider={stateProvider} id={id} inject>
+        <Requestor />
+      </Request>
+    );
+    const wrap = wrapRequest(node)(requestState);
+    expect(wrap.is(Requestor)).toBeTruthy()
+  });
+
+  it('Should wrap a found Request node when Request is a child', () => {
+    const node = shallow(
+      <div>
+        <Request stateProvider={stateProvider} id={id} inject>
+          <Requestor />
+        </Request>
+      </div>
+    );
+    const requestNode = node.find(Request).first();
+    const wrap = wrapRequest(requestNode)(requestState);
+    expect(wrap.is(Requestor)).toBeTruthy()
   });
 
   it('Should be able to set the current request state of a request component', () => {
@@ -38,7 +64,7 @@ describe('Wrap a request test', () => {
 
     expect(typeof wrap).toBe('function');
     const fullWrap = wrap(requestState);
-    expect(fullWrap.prop('request')).toMatchObject({ success: false, failed: true });
+    expect(fullWrap.prop('request')).toMatchObject({ data: { success: false, failed: true } });
 
     requestState.failed = false;
     requestState.success = true;
@@ -48,17 +74,10 @@ describe('Wrap a request test', () => {
     expect(nextWrap.prop('request')).toMatchObject({ data: { success: true, failed: false } })
   });
 
-  it('Should rip bare the Request Component', () => {
+  it('Should rip bare to the underlying Requestor Component', () => {
     const wrap = wrapRequest(wrapper)(requestState);
 
-    expect(wrap.prop('inject')).toBeTruthy()
-    expect(wrap.prop('id')).toBe(id)
-  })
-
-  it('Should have the underlying component as immediate child', () => {
-    const wrap = wrapRequest(wrapper)(requestState);
-
-    expect(wrap.children().first().is(Requestor)).toBeTruthy()
+    expect(wrap.is(Requestor)).toBeTruthy()
   })
 
   it('Should be able to mock request action functions anyhow', () => {
@@ -71,12 +90,12 @@ describe('Wrap a request test', () => {
       remove: jest.fn()
     };
     const ripper = wrapRequest(wrapper, actions)(requestState);
-    const reqActions = ripper.prop('actions');
+    const reqActions = ripper.props().request.actions;
     if (reqActions) {
       reqActions.failed()
       reqActions.success()
     }
-    expect(ripper.children().first().is(Requestor)).toBeTruthy()
+    expect(ripper.first().is(Requestor)).toBeTruthy()
     expect(actions.success).toHaveBeenCalled()
     expect(actions.failed).toHaveBeenCalled()
   });

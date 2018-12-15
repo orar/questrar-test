@@ -26,7 +26,10 @@ import { Request } from 'questrar';
 
 export const PetiteComponent = ({ request }) => {
   return (
-    <div onClick={() => request.actions.remove(request.data.id)}>
+    <div
+     className="petiteComponent"
+     onClick={() => request.actions.remove(request.data.id)}
+    >
       <div>{request.data.message}</div>
     </div>
   );
@@ -59,18 +62,17 @@ describe('NiceComponent', () => {
   beforeEach(() => {
     requestState = { ...initialRequestState, id: 'abc123' };
     createWrapper();
-  })
+  });
   
   it('Should render PetiteComponent as default', () => {
-    expect(wrapper.is(PetiteComponent)).toBeTruthy()
+    expect(wrapper.is(Request)).toBeTruthy()
   });
   
   it('Should render a loading gear icon on request `pending`', () => {
     requestState.pending = true;
     const wrap = wrapRequest(wrapper)(requestState);
     
-    expect(wrap.is(RequestPending)).toBeTruthy()
-    expect(wrap.find(PetiteComponent).length).toBe(0)
+    expect(wrap.is(PetiteComponent)).toBeTruthy();
   });
   
   it('Should remove request state `onClick` to close PetiteComponent', () => {
@@ -93,7 +95,7 @@ Package exports two ends. `wrapRequest` as default and a named `import { initial
 
 ```js
 function wrapRequest(
-  requestComponent: ShallowWrapper, //  ShallowWrapper of Request component node
+  requestComponentNode: ShallowWrapper, //  ShallowWrapper of Request component node
   mockActions?: RequestActions
   )(
     defaultRequestState?: RequestState
@@ -103,4 +105,4 @@ function wrapRequest(
 
 ## License
 
-MIT © [orarr](https://github.com/orarr)
+MIT © [orar](https://github.com/orar)
